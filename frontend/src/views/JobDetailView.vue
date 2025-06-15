@@ -28,7 +28,7 @@
         <p class="text-gray-700 whitespace-pre-wrap">{{ job.requirements }}</p>
       </div>
 
-      <div class="apply-section bg-gray-50 p-6 rounded-lg shadow-inner border border-gray-200">
+      <div v-if="isAuthenticated" class="apply-section bg-gray-50 p-6 rounded-lg shadow-inner border border-gray-200">
         <h3 class="text-2xl font-bold text-blue-700 mb-4">Apply for this Job</h3>
         <form @submit.prevent="handleApply">
           <div class="mb-4">
@@ -76,12 +76,16 @@
           </button>
         </form>
       </div>
+      <div v-else class="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded-md mb-4" role="alert">
+        <strong class="font-bold">Notice:</strong>
+        <span class="block sm:inline ml-2">You must be logged in as a job seeker to apply for this job.</span>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, reactive } from 'vue';
+import { ref, onMounted, reactive, computed } from 'vue';
 import { useRoute } from 'vue-router';
 import { useAuthStore } from '../stores/auth'; // Import Pinia auth store
 import { useApplicationsStore } from '../stores/applications'; // Import Pinia applications store
@@ -92,6 +96,7 @@ const API_BASE_URL = 'http://localhost:3000/api'; // Your backend API URL
 const route = useRoute();
 const authStore = useAuthStore();
 const applicationsStore = useApplicationsStore();
+const isAuthenticated = computed(() => !!authStore.user)
 
 // Reactive variables
 const job = ref(null);
