@@ -1,0 +1,15 @@
+    /* src/assets/main.css */
+    @import 'tailwindcss';
+
+    /* You can add your custom global styles below this line if needed */
+
+    /* Ensure Inter font is loaded and applied if not done elsewhere */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+    #app {
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      color: #2c3e50;
+    }
+    
